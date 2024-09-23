@@ -18,7 +18,7 @@ DEFAULT_IGNORE_LIST = [
 
 @dataclass
 class Settings:
-    default_ignore_list: set[str] = field(default_factory=lambda: set(DEFAULT_IGNORE_LIST))
+    ignore_list: set[str] = field(default_factory=lambda: set(DEFAULT_IGNORE_LIST))
 
 
 settings = Settings()
@@ -26,11 +26,11 @@ settings = Settings()
 
 def configure(default_ignore_list: list[str] | None = None, extend_ignore_list: list[str] | None = None) -> None:
     if default_ignore_list is not None and extend_ignore_list is not None:
-        settings.default_ignore_list = set([*default_ignore_list, *extend_ignore_list])
+        settings.ignore_list = set([*default_ignore_list, *extend_ignore_list])
     if default_ignore_list is not None:
-        settings.default_ignore_list = set(default_ignore_list)
+        settings.ignore_list = set(default_ignore_list)
     if extend_ignore_list:
-        settings.default_ignore_list = set([*settings.default_ignore_list, *extend_ignore_list])
+        settings.ignore_list = set([*settings.ignore_list, *extend_ignore_list])
 
 
 def reset_config() -> None:
