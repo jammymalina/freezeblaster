@@ -30,6 +30,8 @@ jobs:
         run: |
           poetry install --sync --no-interaction
           poetry add pydantic@${{ matrix.pydantic-version }}
+          echo "Using pydantic version:"
+          python -c "import pydantic; print(pydantic.__version__)"
       - name: Run the code linting
         run: |
           poetry run black --check .

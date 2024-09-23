@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
 black = "^24.8.0"
 isort = "^5.13.2"
 pylint = "^3.3.0"
