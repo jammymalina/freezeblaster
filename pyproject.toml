@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "freezeblaster"
+version = "1.0.0"
+description = "FreezeBlaster is a library that allows time travel by mocking the datetime module"
+authors = ["Jakub Jantosik <jakub.jantosik@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+isort = "^5.13.2"
+pylint = "^3.3.0"
+mypy = "^1.11.2"
+
+[tool.poetry.group.pydantic]
+optional = true
+
+[tool.poetry.group.pydantic.dependencies]
+pydantic = "*"
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311", "py312"]
+include = "\\.pyi?$"
+
+[tool.isort]
+profile = "black"
+known_first_party = ["freezeblaster"]
+
+[tool.pylint]
+disable = [
+  "C0301", # Line too long (108/100) (line-too-long)
+  "C0114", # Missing module docstring (missing-module-docstring)
+  "C0115", # Missing class docstring (missing-class-docstring)
+  "C0116", # Missing function or method docstring (missing-function-docstring)
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
