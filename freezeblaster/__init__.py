@@ -1,3 +1,5 @@
+from dataclasses import dataclass, field
+
 DEFAULT_IGNORE_LIST = [
     "nose.plugins",
     "six.moves",
@@ -14,11 +16,9 @@ DEFAULT_IGNORE_LIST = [
 ]
 
 
+@dataclass
 class Settings:
-    default_ignore_list: set[str]
-
-    def __init__(self, default_ignore_list: list[str] | None = None) -> None:
-        self.default_ignore_list = set(default_ignore_list or DEFAULT_IGNORE_LIST)
+    default_ignore_list: set[str] = field(default_factory=lambda: set(DEFAULT_IGNORE_LIST))
 
 
 settings = Settings()
@@ -34,5 +34,4 @@ def configure(default_ignore_list: list[str] | None = None, extend_ignore_list: 
 
 
 def reset_config() -> None:
-    global settings
-    settings = Settings()
+    configure(DEFAULT_IGNORE_LIST)
