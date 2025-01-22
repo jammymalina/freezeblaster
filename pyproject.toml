@@ -40,5 +40,5 @@ asyncio_default_fixture_loop_scope = "function"
 timeout = 30
 
 [[tool.mypy.overrides]]
-module = ["pymysql.*"]
+module = ["pymysql.*", "pydantic.*", "pydantic_core.*"]
 ignore_missing_imports = true
