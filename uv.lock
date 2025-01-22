@@ -24,6 +24,7 @@ name = "freezeblaster"
 version = "1.0.0"
 source = { editable = "." }
 dependencies = [
+    { name = "packaging" },
     { name = "python-dateutil" },
     { name = "types-python-dateutil" },
 ]
@@ -41,6 +42,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "packaging", specifier = ">=24.2" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "types-python-dateutil", specifier = ">=2.9.0.20241206" },
 ]

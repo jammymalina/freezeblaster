@@ -22,6 +22,7 @@ from typing import (
     Tuple,
     Type,
     TypeVar,
+    Union,
     cast,
     overload,
 )
@@ -29,6 +30,7 @@ from typing import (
 import dateutil
 from dateutil import parser
 from dateutil.tz import tzlocal
+from packaging.version import Version
 
 DEFAULT_IGNORE_LIST = [
     "nose.plugins",
@@ -149,7 +151,7 @@ _real_time_object_ids = {id(obj) for obj in real_date_objects}
 # time.clock is deprecated and was removed in Python 3.8
 real_clock = getattr(time, "clock", None)
 
-freeze_factories: list["StepTickTimeFactory" | "TickingDateTimeFactory" | "FrozenDateTimeFactory"] = []
+freeze_factories: list[Union["StepTickTimeFactory", "TickingDateTimeFactory", "FrozenDateTimeFactory"]] = []
 tz_offsets: list[datetime.timedelta] = []
 ignore_lists: list[Tuple[str, ...]] = []
 tick_flags: list[bool] = []
@@ -1074,3 +1076,28 @@ else:
     pymysql.converters.conversions[FakeDatetime] = pymysql.converters.encoders[real_datetime]
 
 # Setup adapters for pydantic
+try:
+    import pydantic
+except ImportError:
+    pass
+else:
+    if Version("1") <= Version(pydantic.__version__) < Version("2"):
+        pass
+    elif Version("2") <= Version(pydantic.__version__) < Version("3"):
+        import pydantic_core
+
+        @classmethod
+        def _pydantic_core_schema_date(
+            cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
+        ) -> pydantic_core.CoreSchema:
+            return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.date))
+
+        FakeDate.__get_pydantic_core_schema__ = _pydantic_core_schema_date
+
+        @classmethod
+        def _pydantic_core_schema_datetime(
+            cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
+        ) -> pydantic_core.CoreSchema:
+            return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.datetime))
+
+        FakeDatetime.__get_pydantic_core_schema__ = _pydantic_core_schema_datetime
