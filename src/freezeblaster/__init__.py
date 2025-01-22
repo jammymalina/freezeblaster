@@ -1086,18 +1086,16 @@ else:
     elif Version("2") <= Version(pydantic.__version__) < Version("3"):
         import pydantic_core
 
-        @classmethod
         def _pydantic_core_schema_date(
             cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
         ) -> pydantic_core.CoreSchema:
             return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.date))
 
-        FakeDate.__get_pydantic_core_schema__ = _pydantic_core_schema_date
+        FakeDate.__get_pydantic_core_schema__ = classmethod(_pydantic_core_schema_date)  # type: ignore
 
-        @classmethod
         def _pydantic_core_schema_datetime(
             cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
         ) -> pydantic_core.CoreSchema:
             return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.datetime))
 
-        FakeDatetime.__get_pydantic_core_schema__ = _pydantic_core_schema_datetime
+        FakeDatetime.__get_pydantic_core_schema__ = classmethod(_pydantic_core_schema_datetime)  # type: ignore
