@@ -1087,14 +1087,18 @@ else:
         import pydantic_core
 
         def _pydantic_core_schema_date(
-            cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
+            cls,
+            source_type: Any,
+            handler: pydantic.GetCoreSchemaHandler,  # type: ignore
         ) -> pydantic_core.CoreSchema:
             return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.date))
 
         FakeDate.__get_pydantic_core_schema__ = classmethod(_pydantic_core_schema_date)  # type: ignore
 
         def _pydantic_core_schema_datetime(
-            cls, source_type: Any, handler: pydantic.GetCoreSchemaHandler
+            cls,
+            source_type: Any,
+            handler: pydantic.GetCoreSchemaHandler,  # type: ignore
         ) -> pydantic_core.CoreSchema:
             return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.datetime))
 
