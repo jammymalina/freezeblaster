@@ -680,13 +680,13 @@ class _freeze_time:
         self.real_asyncio = real_asyncio
 
     @overload
-    def __call__(self, func: Type[T2]) -> Type[T2]: ...
+    def __call__(self, func: Type[T2]) -> Type[T2]: ...  # type: ignore
 
     @overload
-    def __call__(self, func: "Callable[P, Awaitable[Any]]") -> "Callable[P, Awaitable[Any]]": ...
+    def __call__(self, func: "Callable[P, Awaitable[Any]]") -> "Callable[P, Awaitable[Any]]": ...  # type: ignore
 
     @overload
-    def __call__(self, func: "Callable[P, T]") -> "Callable[P, T]": ...
+    def __call__(self, func: "Callable[P, T]") -> "Callable[P, T]": ...  # type: ignore
 
     def __call__(
         self,
@@ -1028,8 +1028,8 @@ def freeze_time(
     if ignore is None:
         ignore = []
     ignore = ignore[:]
-    if settings.default_ignore_list:
-        ignore.extend(settings.default_ignore_list)
+    if settings.ignore_list:
+        ignore.extend(settings.ignore_list)
 
     return _freeze_time(
         time_to_freeze_str=time_to_freeze,
