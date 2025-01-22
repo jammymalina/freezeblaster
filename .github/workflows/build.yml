@@ -18,7 +18,7 @@ jobs:
       - name: Install pydantic
         run: |
           uv pip install 'pydantic${{ matrix.pydantic-version }}'
-          pydantic_version=$(python -c "import pydantic; print(pydantic.__version__)")
+          pydantic_version=$(echo 'import pydantic; print(pydantic.__version__)' | uv run -)
           echo "Using pydantic version: ${pydantic_version}"
       - name: Run lint check
         run: uv run ruff check --exit-non-zero-on-fix
