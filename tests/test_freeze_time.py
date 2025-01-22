@@ -83,7 +83,7 @@ def test_pydantic_v1() -> None:
         "test_date": FakeDate(2012, 1, 10),
         "test_datetime": FakeDatetime(2012, 1, 10, 13, 52, 1, tzinfo=datetime.timezone.utc),
     }
-    assert test_data.json() == '{"test_datetime":"2012-01-10T13:52:01Z","test_date":"2012-01-10"}'
+    assert test_data.json() == '{"test_datetime": "2012-01-10T13:52:01+00:00", "test_date": "2012-01-10"}'
 
     parsed_test_data = test_data.parse_obj({"test_date": "2012-01-10", "test_datetime": "2012-01-10T13:52:01Z"})
     assert parsed_test_data == test_data
