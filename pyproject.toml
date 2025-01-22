@@ -1,6 +1,6 @@
 [project]
 name = "freezeblaster"
-version = "1.0.0"
+version = "0.1.0"
 description = "FreezeBlaster is a library that allows time travel by mocking the datetime module"
 authors = [
     { name = "Jakub Jantosik", email = "jakub.jantosik@gmail.com" }
