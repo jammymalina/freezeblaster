@@ -9,7 +9,7 @@ readme = "README.md"
 
 requires-python = ">=3.11"
 dependencies = [
-    "packaging>=24.2",
+    "packaging>=24.0",
     "python-dateutil>=2.7",
     "types-python-dateutil>=2.7",
 ]
