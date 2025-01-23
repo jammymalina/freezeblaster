@@ -1,13 +1,13 @@
 [project]
 name = "freezeblaster"
-version = "0.1.0"
+version = "0.2.0"
 description = "FreezeBlaster is a library that allows time travel by mocking the datetime module"
 authors = [
     { name = "Jakub Jantosik", email = "jakub.jantosik@gmail.com" }
 ]
 readme = "README.md"
 
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 dependencies = [
     "packaging>=24.0",
     "python-dateutil>=2.7",
