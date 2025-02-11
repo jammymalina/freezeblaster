@@ -1091,7 +1091,9 @@ else:
             source_type: Any,
             handler: pydantic.GetCoreSchemaHandler,  # type: ignore
         ) -> pydantic_core.CoreSchema:
-            return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.date))
+            return pydantic_core.core_schema.no_info_after_validator_function(
+                cls, handler.generate_schema(datetime.date)
+            )
 
         FakeDate.__get_pydantic_core_schema__ = classmethod(_pydantic_core_schema_date)  # type: ignore
 
@@ -1100,6 +1102,8 @@ else:
             source_type: Any,
             handler: pydantic.GetCoreSchemaHandler,  # type: ignore
         ) -> pydantic_core.CoreSchema:
-            return pydantic_core.core_schema.no_info_after_validator_function(cls, handler(datetime.datetime))
+            return pydantic_core.core_schema.no_info_after_validator_function(
+                cls, handler.generate_schema(datetime.datetime)
+            )
 
         FakeDatetime.__get_pydantic_core_schema__ = classmethod(_pydantic_core_schema_datetime)  # type: ignore
