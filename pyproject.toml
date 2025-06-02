@@ -1,6 +1,6 @@
 [project]
 name = "freezeblaster"
-version = "0.3.0"
+version = "0.4.0"
 description = "FreezeBlaster is a library that allows time travel by mocking the datetime module"
 authors = [
     { name = "Jakub Jantosik", email = "jakub.jantosik@gmail.com" }
@@ -20,18 +20,18 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "mypy>=1.15.0",
-    "pytest>=8.3.4",
-    "pytest-asyncio>=0.25.3",
-    "pytest-mock>=3.14.0",
-    "pytest-timeout>=2.3.1",
-    "ruff>=0.9.6",
+    "mypy>=1.16.0",
+    "pytest>=8.4.0",
+    "pytest-asyncio>=1.0.0",
+    "pytest-mock>=3.14.1",
+    "pytest-timeout>=2.4.0",
+    "ruff>=0.11.12",
 ]
 
 [tool.ruff]
-line-length = 120
-
 target-version = "py311"
+line-length = 120
+extend-select = ["I"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
